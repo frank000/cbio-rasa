@@ -1,0 +1,62 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - change_otp
+  - confirma_sim
+  - provide_infos
+  - teste
+  - teste2
+
+actions:
+  - action_send_info
+  - action_custom
+
+entities:
+  - matricula
+
+slots:
+  matricula:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: matricula
+
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_confirmacao_otp:
+  - text: "Olá, você deve estar com problema no login pelo Qr Code. Correto?"
+
+
+  utter_confirmacao_sim_otp:
+    - text: "Ok. Me informe então seu login usado para os acesssos."
+
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

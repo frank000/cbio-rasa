@@ -1,0 +1,42 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+  - action: action_restart
+
+- story: alteracao otop
+  steps:
+  - intent: change_otp
+  - action: utter_confirmacao_otp
+  - intent: affirm
+  - action: utter_confirmacao_sim_otp
+  - intent: provide_infos
+  - action: action_send_info
+
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+  - action: action_restart
+
+- story: teste path
+  steps:
+  - intent: teste
+  - action: action_send_info
+
+- story: teste path2
+  steps:
+  - intent: teste2
+  - action: action_custom
