@@ -13,10 +13,16 @@ intents:
   - provide_infos
   - teste
   - teste2
+  - teste_botao
+  - escolheu_sim
+  - escolheu_nao
+  - in_talk_attendant
+  - in_ac_talk_attendant_telegram
 
 actions:
   - action_send_info
   - action_custom
+  - ac_talk_attendant_telegram
 
 entities:
   - matricula
@@ -56,6 +62,15 @@ responses:
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+
+  utter_talk_attendant:
+  - text: "Gostaria de falar com um atende?"
+    buttons:
+    - title: "Sim"
+      payload: "/in_ac_talk_attendant_telegram"
+    - title: "Não"
+      payload: "/greet"
+
 
 session_config:
   session_expiration_time: 60

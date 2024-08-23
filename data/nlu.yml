@@ -115,4 +115,34 @@ nlu:
 - intent: teste2
   examples: |
     - hope
-    
+
+
+
+ 
+
+
+- intent: escolheu_sim
+  examples: |
+    - btn
+
+- intent: escolheu_nao
+  examples: |
+    - btn
+
+
+- intent: in_talk_attendant
+  examples: |
+    - Quero falar com um atendente
+    - quero falar com responsavel
+    - Alguem pode me atender?
+    - Não tive respostas suficientes
+    - ainda estou com duvidas
+    - preciso de uma ajuda especializada
+    - me passa para falar com alguem 
+    - quero perguntar mais
+    - não obtive respostas, me passa para alguem
+
+- intent: in_ac_talk_attendant_telegram
+  examples: |
+    - [attendant]
+    - [[attendant]]

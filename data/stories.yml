@@ -36,7 +36,25 @@ stories:
   - intent: teste
   - action: action_send_info
 
-- story: teste path2
+  
+
+
+- story: teste escolheu_sim
   steps:
-  - intent: teste2
-  - action: action_custom
+  - intent: escolheu_sim
+  - action: utter_iamabot
+
+- story: teste escolheu_nao
+  steps:
+  - intent: escolheu_nao
+  - action: utter_goodbye
+
+- story: st_talk_attendant
+  steps:
+  - intent: in_talk_attendant
+  - action: utter_talk_attendant
+
+- story: st_ac_talk_attendant
+  steps:
+  - intent: in_ac_talk_attendant_telegram
+  - action: ac_talk_attendant_telegram
