@@ -1,0 +1,65 @@
+version: "3.1"
+
+stories:
+ 
+- story: alteracao otop
+  steps:
+  - intent: change_otp
+  - action: utter_confirmacao_otp
+  - intent: affirm
+  - action: utter_confirmacao_sim_otp
+  - intent: provide_infos
+  - action: action_send_info
+
+ 
+
+- story: teste path
+  steps:
+  - intent: teste
+  - action: action_send_info
+
+  
+
+
+- story: teste escolheu_sim
+  steps:
+  - intent: escolheu_sim
+  - action: utter_iamabot
+
+- story: teste escolheu_nao
+  steps:
+  - intent: escolheu_nao
+  - action: utter_goodbye
+
+- story: st_talk_attendant
+  steps:
+  - intent: in_talk_attendant
+  - action: utter_talk_attendant
+
+- story: st_ac_talk_attendant
+  steps:
+  - intent: in_ac_talk_attendant_telegram
+  - action: ac_talk_attendant_telegram
+
+- story: st_ac_duvidas
+  steps:
+  - intent: greet
+  - action: utter_greets
+  - intent: in_duvida_produtos
+  - action: utter_duvida_produtos
+ 
+- story: st_duvida_entrega
+  steps:
+  - intent: greet
+  - action: utter_greets
+  - intent: in_duvida_entrega
+  - action: utter_duvida_entrega
+ 
+- story: st_duvida_prazo_entrega
+  steps:
+  - intent: greet
+  - action: utter_greets
+  - intent: in_duvida_prazo_entrega
+  - action: utter_duvida_prazo_entrega
+
+ 

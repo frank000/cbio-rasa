@@ -18,12 +18,14 @@ intents:
   - escolheu_nao
   - in_talk_attendant
   - in_ac_talk_attendant_telegram
+  - faq
 
 actions:
   - action_send_info
   - action_custom
   - ac_talk_attendant_telegram
-
+  - ac_rag_query
+  
 entities:
   - matricula
 

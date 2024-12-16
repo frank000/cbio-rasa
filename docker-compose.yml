@@ -1,4 +1,4 @@
-version: '3.0'
+version: '3.7'
 services:
   rasa:
     image: rasa/rasa:3.6.19-full
@@ -9,3 +9,98 @@ services:
     command:
       - run
     user: "${UID}:${GID}"
+
+  rasa2:
+    image: rasa/rasa:3.6.19-full
+    ports:
+      - 5006:5005
+    volumes:
+      - ./simples/:/app
+    command:
+      - run
+    user: "${UID}:${GID}"
+
+  postgres:
+    image: postgres:16.2
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - keycloak_network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0.4
+    command: start
+    environment:
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HEALTH_ENABLED: true
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres/${POSTGRES_DB}
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - /home/frank/Sites/vristo-main-1.1.8/angular/meu:/opt/keycloak/themes/meu
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      - postgres
+    networks:
+      - keycloak_network
+
+  minio:
+    image: quay.io/minio/minio
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: admin 
+      MINIO_ROOT_PASSWORD: adminasdf123
+    volumes:
+      - ~/minio/data:/data
+    command: server /data --console-address ":9001"
+    
+  mongodb:
+    image: mongo:4.4.2
+    container_name: mongo_rs
+    ports:
+      - "27017:27017"
+      - "28017:28017"
+    command: >
+      mongod --replSet rs0 --bind_ip localhost,mongo_rs
+    volumes:
+      -  /home/andremaximo/dev/apps/docker/data/mongo:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+  mongo-initiator:
+    image: mongo:4.4.2
+    depends_on:
+      - mongodb
+    command: >
+      bash -c "for i in {1..40}; do
+                 mongo mongodb://mongodb:27017 --eval 'rs.initiate({_id: \"rs0\", members: [{_id: 0, host: \"mongo_rs:27017\"}]})' && break || sleep 5;
+               done"
+    restart: "on-failure"
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  keycloak_network:
+    driver: bridge

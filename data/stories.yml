@@ -58,3 +58,8 @@ stories:
   steps:
   - intent: in_ac_talk_attendant_telegram
   - action: ac_talk_attendant_telegram
+
+- story: Responder FAQ Dinâmico
+  steps:
+    - intent: faq
+    - action: ac_rag_query

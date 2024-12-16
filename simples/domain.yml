@@ -1,0 +1,101 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - change_otp
+  - confirma_sim
+  - provide_infos
+  - teste
+  - teste2
+  - teste_botao
+  - escolheu_sim
+  - escolheu_nao
+  - in_talk_attendant
+  - in_ac_talk_attendant_telegram
+  - in_duvida_produtos
+  - in_duvida_entrega
+  - in_duvida_prazo_entrega
+  - EXTERNAL_finalizacao
+
+actions:
+  - action_send_info
+  - action_custom
+  - ac_talk_attendant_telegram
+  - ac_remind_finalizacao
+
+entities:
+  - matricula
+
+slots:
+  matricula:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: matricula
+
+
+responses:
+  utter_greets:
+  - text: "Olá tudo bem? É um prazer poder atendê-lo. Em que posso ajudar?"
+
+  utter_confirmacao_otp:
+  - text: "Olá, você deve estar com problema no login pelo Qr Code. Correto?"
+
+
+  utter_confirmacao_sim_otp:
+    - text: "Ok. Me informe então seu login usado para os acesssos."
+
+
+  utter_perguntar_duvidas:
+    - text: "Ótimo. Qual sua duvida?"
+
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_finalizacao:
+  - text: "Posso ajudar em mais alguma coisa?"
+
+  utter_agradecimento:
+  - text: "Nós da Simples SA agradeçemos o seu contato. É um prazer ter sua parceria."
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_duvida_produtos:
+  - text: "Ok. Nossos produtos são frutos de muito trabalho e dedicação, e você pode encontrar todos na lista disponível no link https://docs.google.com/document/d/1GwI8bG4AmEQ8Iap7rQ5b7xa6sgY2RewpFSWTgt3uQSk/edit?usp=sharing."
+
+  utter_duvida_entrega:
+  - text: "Nossas engtregas são feitas de acordo com o a solicitação do cliente. Caso a entrega seja via Correios, será levado em consideração a distancia e a quantidade de itens adquiridos com a Simples SA."
+
+  utter_duvida_prazo_entrega:
+  - text: "Os prazos para Brassília é de no maximo 1hr, a depender da região atendida. Para os prazos em outras regiões você pode calcular o prazo através do site https://www.correios.com.br/"
+
+  utter_talk_attendant:
+  - text: "Gostaria de falar com um atende?"
+    buttons:
+    - title: "Sim"
+      payload: "/in_ac_talk_attendant_telegram"
+    - title: "Não"
+      payload: "/EXTERNAL_finalizacao"
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

@@ -11,7 +11,7 @@
 # https://rasa.com/docs/rasa/custom-actions
 
 action_endpoint:
- url: "https://profound-briefly-elf.ngrok-free.app/v1/action-server/webhook"
+ url: "https://pleasing-elf-instantly.ngrok-free.app/v1/action-server/webhook"
 
 # Tracker store which is used to store the conversations.
 # By default the conversations are stored in memory.

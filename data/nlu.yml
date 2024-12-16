@@ -146,3 +146,14 @@ nlu:
   examples: |
     - [attendant]
     - [[attendant]]
+
+- intent: faq
+  examples: |
+    - Qual é o horário de funcionamento?
+    - Como posso cancelar meu pedido?
+    - Quais são as formas de pagamento aceitas?
+    - Como entrar em contato com o suporte?
+    - Vocês entregam no fim de semana?
+    - O que fazer se meu pedido atrasar?
+    - Posso alterar meu endereço de entrega?
+    - quero faq

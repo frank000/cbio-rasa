@@ -93,3 +93,11 @@ rasa train
 cd ..
 rasa train
 exit;.
+rasa train
+EXIT;
+exit;
+rasa train
+exit
+rasa train
+rasa train
+exit
